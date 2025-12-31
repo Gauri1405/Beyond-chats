@@ -1,0 +1,26 @@
+const Article = require("../models/article.model");
+
+exports.create = async (req, res) => {
+  const article = await Article.create(req.body);
+  res.json(article);
+};
+
+exports.getAll = async (req, res) => {
+  const articles = await Article.find();
+  res.json(articles);
+};
+
+exports.getOne = async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.json(article);
+};
+
+exports.update = async (req, res) => {
+  const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.json(article);
+};
+
+exports.remove = async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id);
+  res.json({ success: true });
+};
